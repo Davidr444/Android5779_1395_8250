@@ -18,6 +18,5 @@ public class MainActivity extends AppCompatActivity {
 
         myRef.setValue("David, Rakovsky!");
         setContentView(R.layout.activity_main);
-
     }
 }
