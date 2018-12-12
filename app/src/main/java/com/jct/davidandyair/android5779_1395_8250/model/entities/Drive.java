@@ -19,6 +19,18 @@ public class Drive {
     private String phoneNumber;
     private String eMailAddress;
 
+    public Drive()
+    {
+        this.status = null;
+        this.source = null;
+        this.destination = null;
+        this.beginning = null;
+        this.end = null;
+        this.name = null;
+        this.phoneNumber = null;
+        this.eMailAddress = null;
+    }
+
     public Drive(DriveStatus status, Location source, Location destination, Time beginning, Time end,
                  String name, String phoneNumber, String eMailAddress)
     {
