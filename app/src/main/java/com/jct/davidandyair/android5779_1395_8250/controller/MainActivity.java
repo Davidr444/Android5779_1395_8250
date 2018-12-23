@@ -1,5 +1,7 @@
 package com.jct.davidandyair.android5779_1395_8250.controller;
 
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView destination;
     AutoCompleteTextView source;
     Button button;
+
+    // Acquire a reference to the system Location Manager
+    LocationManager locationManager;
+    // Define a listener that responds to location updates
+    LocationListener locationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
