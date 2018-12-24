@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">גט טקסי</string>
-    <string name="passenger_name">שם:</string>
-    <string name="passenger_phone">טלפון:</string>
-    <string name="passenger_email">אימייל:</string>
-    <string name="passenger_destination">יעד:</string>
     <string name="passenger_fill_name">השם שלך</string>
     <string name="passenger_fill_Phone">מספר הטלפון שלך</string>
     <string name="passenger_fill_email">כתובת המייל שלך</string>
-    <string name="passenger_source">מוצא:</string>
     <string name="passenger_fill_destination">היעד שלך</string>
     <string name="passenger_fill_source">המוצא שלך</string>
     <string name="send_button">שלח</string>
@@ -18,4 +13,5 @@
     <string name="error_email">נא הזן את כתובת המייל שלך</string>
     <string name="error_source">נא הזן את כתובת המוצא המבוקשת</string>
     <string name="error_destination">נא הזן את כתובת היעד המבוקשת</string>
+    <string name="current_location">מיקום נוכחי</string>
 </resources>

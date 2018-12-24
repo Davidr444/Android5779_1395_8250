@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">Get Taxi</string>
-    <string name="passenger_name">Name:</string>
-    <string name="passenger_phone">Phone:</string>
-    <string name="passenger_email">Email:</string>
-    <string name="passenger_destination">Destination:</string>
     <string name="passenger_fill_name">Your Name</string>
-    <string name="passenger_source">Source:</string>
     <string name="passenger_fill_Phone">Your Phone</string>
     <string name="passenger_fill_email">Your Email Address</string>
     <string name="passenger_fill_destination">Your Destination</string>
@@ -17,4 +12,5 @@
     <string name="error_email">Please Enter Your Email Address</string>
     <string name="error_source">Please Enter Your Source Address</string>
     <string name="error_destination">Please Enter Your Destination Address</string>
+    <string name="current_location">Current Location</string>
 </resources>

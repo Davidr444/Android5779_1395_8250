@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView destination;
     AutoCompleteTextView source;
     Button button;
-    Button getMyPlace;
+    FloatingActionButton getMyPlace;
 
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
@@ -80,23 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        //init
-        name = new EditText(this);
-        phone = new EditText(this);
-        email = new EditText(this);
-        destination = new AutoCompleteTextView(this);
-        source = new AutoCompleteTextView(this);
-        button = new Button(this);
-        getMyPlace = new Button(this);
-
         backend = FactoryBackend.getBackend();
 
 
-        name = findViewById(R.id.editText);
-        phone = findViewById(R.id.editText3);
-        email = findViewById(R.id.editText4);
-        destination = findViewById(R.id.autoCompleteTextView);
-        source = findViewById(R.id.autoCompleteTextView3);
+        name = findViewById(R.id.nameT);
+        phone = findViewById(R.id.phoneT);
+        email = findViewById(R.id.emailT);
+        destination = findViewById(R.id.destT);
+        source = findViewById(R.id.srcT);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -183,10 +175,12 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // Android version is lesser than 6.0 or the permission is already granted.
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                     getMyPlace.setEnabled(false);
                     Toast.makeText(getBaseContext(), R.string.search_location, Toast.LENGTH_LONG).show();
                 }
             }
     });
     }
+
 }
