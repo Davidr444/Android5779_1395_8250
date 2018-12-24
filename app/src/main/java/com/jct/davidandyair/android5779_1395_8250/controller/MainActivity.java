@@ -1,18 +1,30 @@
 package com.jct.davidandyair.android5779_1395_8250.controller;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.jct.davidandyair.android5779_1395_8250.R;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.Drive;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     IBackend backend;
@@ -22,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView destination;
     AutoCompleteTextView source;
     Button button;
+    Button getMyPlace;
 
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
@@ -32,24 +45,77 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findViews();
         setContentView(R.layout.activity_main);
+        findViews();
+
+    }
+
+    public String getPlace(Location location) {
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            if (addresses.size() > 0) {
+                String cityName = addresses.get(0).getAddressLine(0);
+                //  String stateName = addresses.get(0).getAddressLine(1);
+                //  String countryName = addresses.get(0).getAddressLine(2);
+                //  return stateName + "\n" + cityName + "\n" + countryName;
+                return cityName;
+            }
+
+            return "no place: \n ("+location.getLongitude()+" , "+location.getLatitude()+")";
+        }
+        catch(
+                IOException e)
+
+        {
+            e.printStackTrace();
+        }
+        return "IOException ...";
     }
 
     private void findViews()
     {
+        //init
+        name = new EditText(this);
+        phone = new EditText(this);
+        email = new EditText(this);
+        destination = new AutoCompleteTextView(this);
+        source = new AutoCompleteTextView(this);
+        button = new Button(this);
+        getMyPlace = new Button(this);
+
+
         name = findViewById(R.id.editText);
         phone = findViewById(R.id.editText3);
         email = findViewById(R.id.editText4);
         destination = findViewById(R.id.autoCompleteTextView);
         source = findViewById(R.id.autoCompleteTextView3);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                source.setText(getPlace(location));////location.toString());
+            }
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                //TODO
+            }
+
+            public void onProviderEnabled(String provider) {
+                //TODO
+            }
+
+            public void onProviderDisabled(String provider) {
+                //TODO
+            }
+        };
 
 
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Drive drive = new Drive();
 
                 drive.setName(name.getText().toString());
@@ -62,5 +128,23 @@ public class MainActivity extends AppCompatActivity {
                 backend.askForNewDrive(drive);
             }
         });
+
+        getMyPlace = findViewById(R.id.getmyplace);
+        getMyPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                //Check the SDK version and whether the permission is already granted or not.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 5);
+
+                } else {
+                    // Android version is lesser than 6.0 or the permission is already granted.
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    getMyPlace.setEnabled(false);
+                    Toast.makeText(getBaseContext(), R.string.search_location, Toast.LENGTH_LONG).show();
+                }
+            }
+    });
     }
 }

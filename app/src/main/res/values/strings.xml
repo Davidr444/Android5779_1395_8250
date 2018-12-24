@@ -11,4 +11,5 @@
     <string name="passenger_fill_destination">Your Destination</string>
     <string name="passenger_fill_source">Your Source</string>
     <string name="send_button">Send</string>
+    <string name="search_location">Looking for your location ...</string>
 </resources>

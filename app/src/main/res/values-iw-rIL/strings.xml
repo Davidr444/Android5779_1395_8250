@@ -12,4 +12,5 @@
     <string name="passenger_fill_destination">היעד שלך</string>
     <string name="passenger_fill_source">המוצא שלך</string>
     <string name="send_button">שלח</string>
+    <string name="search_location">מחפש את מיקומך...</string>
 </resources>

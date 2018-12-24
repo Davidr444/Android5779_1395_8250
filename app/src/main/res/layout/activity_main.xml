@@ -146,6 +146,8 @@
         android:id="@+id/autoCompleteTextView3"
         android:layout_width="212dp"
         android:layout_height="41dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="34dp"
         android:layout_marginRight="34dp"
@@ -164,5 +166,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/getmyplace"
+        android:layout_width="78dp"
+        android:layout_height="28dp"
+        android:text="Get My Place"
+        android:textSize="6sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="302dp" />
 
 </android.support.constraint.ConstraintLayout>
