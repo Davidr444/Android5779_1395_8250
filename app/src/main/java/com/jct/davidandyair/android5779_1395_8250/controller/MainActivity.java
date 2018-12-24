@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 
 import com.jct.davidandyair.android5779_1395_8250.R;
+import com.jct.davidandyair.android5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.Drive;
 
@@ -46,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViews();
 
+        findViews();
     }
 
     public String getPlace(Location location) {
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         button = new Button(this);
         getMyPlace = new Button(this);
 
+        backend = FactoryBackend.getBackend();
+
 
         name = findViewById(R.id.editText);
         phone = findViewById(R.id.editText3);
@@ -116,13 +120,51 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Get the Values
+                String _name = name.getText().toString();
+                String _phoneNumber = phone.getText().toString();
+                String _email = email.getText().toString();
+                //Location _destination = destination.getText();
+                //Location _source = source.getText();
+
+                //Check integrity
+                Boolean formIsComplete = true;
+                if(TextUtils.isEmpty(_name))
+                {
+                    name.setError(getText(R.string.error_name));
+                    formIsComplete = false;
+                }
+                if(TextUtils.isEmpty(_phoneNumber))
+                {
+                    phone.setError(getText(R.string.error_phone));
+                    formIsComplete = false;
+                }
+                if(TextUtils.isEmpty(_email))
+                {
+                    email.setError(getText(R.string.error_email));
+                    formIsComplete = false;
+                }
+             /*   if(TextUtils.isEmpty(_destination))
+                {
+                    source.setError(getText(R.string.error_source));
+                    formIsComplete = false;
+                }
+                if(TextUtils.isEmpty(_source))
+                {
+                    destination.setError(getText(R.string.error_destination));
+                    formIsComplete = false;
+                }*/
+
+                if(!formIsComplete)
+                    return;
+
                 Drive drive = new Drive();
 
-                drive.setName(name.getText().toString());
-                drive.setPhoneNumber(phone.getText().toString());
-                drive.seteMailAddress(email.getText().toString());
-                //drive.setDestination(destination.getText().toString());
-                //drive.setDestination(source.getText().toString());
+                drive.setName(_name);
+                drive.setPhoneNumber(_phoneNumber);
+                drive.seteMailAddress(_email);
+                //drive.setDestination(_destination);
+                //drive.setSource(_source);
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
                 backend.askForNewDrive(drive);

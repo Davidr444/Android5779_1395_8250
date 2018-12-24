@@ -13,4 +13,9 @@
     <string name="passenger_fill_source">המוצא שלך</string>
     <string name="send_button">שלח</string>
     <string name="search_location">מחפש את מיקומך...</string>
+    <string name="error_name">נא הזן את שמך</string>
+    <string name="error_phone">נא הזן את מספר הפלאפון שלך</string>
+    <string name="error_email">נא הזן את כתובת המייל שלך</string>
+    <string name="error_source">נא הזן את כתובת המוצא המבוקשת</string>
+    <string name="error_destination">נא הזן את כתובת היעד המבוקשת</string>
 </resources>

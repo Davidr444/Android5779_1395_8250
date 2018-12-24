@@ -12,4 +12,9 @@
     <string name="passenger_fill_source">Your Source</string>
     <string name="send_button">Send</string>
     <string name="search_location">Looking for your location ...</string>
+    <string name="error_name">Please Enter Your Name</string>
+    <string name="error_phone">Please Enter Your Phone Number</string>
+    <string name="error_email">Please Enter Your Email Address</string>
+    <string name="error_source">Please Enter Your Source Address</string>
+    <string name="error_destination">Please Enter Your Destination Address</string>
 </resources>
