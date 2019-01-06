@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText name;
     private EditText phone;
     private EditText email;
-    private Button button;
+    private Button button;//
     private FloatingActionButton getMyPlace;
     private PlaceAutocompleteFragment placeAutocompleteFragment1;
     private PlaceAutocompleteFragment placeAutocompleteFragment2;
