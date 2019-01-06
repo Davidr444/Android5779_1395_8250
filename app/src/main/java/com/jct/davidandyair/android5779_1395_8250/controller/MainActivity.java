@@ -1,5 +1,7 @@
 package com.jct.davidandyair.android5779_1395_8250.controller;
 
+
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -9,17 +11,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.jct.davidandyair.android5779_1395_8250.R;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.IBackend;
@@ -29,21 +33,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+
+
 public class MainActivity extends AppCompatActivity {
-    IBackend backend;
-    EditText name;
-    EditText phone;
-    EditText email;
-    AutoCompleteTextView destination;
-    AutoCompleteTextView source;
-    Button button;
-    FloatingActionButton getMyPlace;
+    private IBackend backend;
+    private EditText name;
+    private EditText phone;
+    private EditText email;
+    private Button button;
+    private FloatingActionButton getMyPlace;
+    private PlaceAutocompleteFragment placeAutocompleteFragment1;
+    private PlaceAutocompleteFragment placeAutocompleteFragment2;
+    private Location locationA = new Location("A");
+    private Location locationB = new Location("B") ;
 
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
     // Define a listener that responds to location updates
     LocationListener locationListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +94,46 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.nameT);
         phone = findViewById(R.id.phoneT);
         email = findViewById(R.id.emailT);
-        destination = findViewById(R.id.destT);
-        source = findViewById(R.id.srcT);
+
+        placeAutocompleteFragment1 = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.srcT);
+        placeAutocompleteFragment2 = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.destT);
+        placeAutocompleteFragment1.setHint(getString(R.string.passenger_fill_source));
+        placeAutocompleteFragment2.setHint(getString(R.string.passenger_fill_destination));
+
+
+        placeAutocompleteFragment1.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                locationA.setLatitude(place.getLatLng().latitude);
+                locationA.setLongitude(place.getLatLng().longitude);
+                // .getAddress().toString();//get place details here
+            }
+
+            @Override
+            public void onError(Status status) {
+
+            }
+        });
+
+        placeAutocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                //  to = place.getAddress().toString();//get place details here
+                locationB.setLatitude(place.getLatLng().latitude);
+                locationB.setLongitude(place.getLatLng().longitude);
+            }
+
+            @Override
+            public void onError(Status status) {
+
+            }
+        });
+
+
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                source.setText(getPlace(location));////location.toString());
+                placeAutocompleteFragment1.setText(getPlace(location));////location.toString());
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {
                 //TODO
@@ -155,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
                 drive.setName(_name);
                 drive.setPhoneNumber(_phoneNumber);
                 drive.seteMailAddress(_email);
-                //drive.setDestination(_destination);
-                //drive.setSource(_source);
+                drive.setDestination(locationB);
+                drive.setSource(locationA);
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
                 backend.askForNewDrive(drive);

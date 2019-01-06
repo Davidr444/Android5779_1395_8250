@@ -53,8 +53,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneT" />
 
-    <AutoCompleteTextView
+    <fragment
         android:id="@+id/destT"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -62,19 +63,19 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/passenger_fill_destination"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailT" />
+        app:layout_constraintTop_toBottomOf="@+id/emailT"/>
 
-    <AutoCompleteTextView
+
+    <fragment
         android:id="@+id/srcT"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/passenger_fill_source"
         app:layout_constraintEnd_toStartOf="@+id/getmyplace"
         app:layout_constraintStart_toStartOf="@+id/destT"
         app:layout_constraintTop_toBottomOf="@+id/destT" />
