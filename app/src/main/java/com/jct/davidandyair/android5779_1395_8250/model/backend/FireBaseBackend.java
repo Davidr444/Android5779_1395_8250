@@ -22,6 +22,6 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public void askForNewDrive(Drive d) {
-        asyncTask.execute(d);
+        asyncTask.execute(d);// using asynctask
     }
 }
