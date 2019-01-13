@@ -191,6 +191,13 @@ public class MainActivity extends AppCompatActivity {
                 if(!formIsComplete)
                     return;
 
+                //Check the integrity of mail via regex
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(_email).matches())
+                {
+                    email.setError(getText(R.string.error_invalid_email));
+                    return;
+                }
+
                 Drive drive = new Drive();
 
                 drive.setName(_name);
