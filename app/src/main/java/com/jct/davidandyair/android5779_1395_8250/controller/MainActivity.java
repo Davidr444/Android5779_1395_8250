@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -203,8 +204,8 @@ public class MainActivity extends AppCompatActivity {
                 drive.setName(_name);
                 drive.setPhoneNumber(_phoneNumber);
                 drive.seteMailAddress(_email);
-                drive.setDestination(locationB);
-                drive.setSource(locationA);
+                drive.setDestination(convertToAddress(locationB));
+                drive.setSource(convertToAddress(locationA));
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
                 backend.askForNewDrive(drive);
@@ -229,6 +230,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     });
+    }
+
+    @NonNull
+    private Address convertToAddress(Location location) {
+        // this function creates a compatible instance of Address foreach instance of Location that it gets.
+        Address address = new Address(null);
+        address.setLatitude(location.getLatitude());
+        address.setLongitude(location.getLongitude());
+
+        return address;
     }
 
 }
