@@ -15,7 +15,9 @@ public class FireBaseBackend implements IBackend {
             database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("drives");
 
-            myRef.push().setValue(drives[0]);
+            String key = myRef.push().getKey();
+            drives[0].setKey(key);
+            myRef.child(key).setValue(drives[0]);
             return null;
         }
     };

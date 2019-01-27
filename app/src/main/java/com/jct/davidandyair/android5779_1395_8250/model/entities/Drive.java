@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Drive {
+
     public enum DriveStatus {
         AVAILABLE, IN_PROGRESS, FINISHED
     }
@@ -20,6 +21,7 @@ public class Drive {
     private String phoneNumber;
     private String eMailAddress;
     private long driverId;
+    private String key;
 
     public Drive()
     {
@@ -87,9 +89,8 @@ public class Drive {
     public void setStatus(DriveStatus status) {
         this.status = status;
     }
-    public void setDriverId(long driverId) {
-        this.driverId = driverId;
-    }
+    public void setDriverId(long driverId) { this.driverId = driverId; }
+    public void setKey(String key) { this.key = key; }
     //endregion
 
     //region gets
@@ -120,6 +121,7 @@ public class Drive {
     public long getDriverId() {
         return driverId;
     }
+    public String getKey() { return key; }
     //endregion
 
 }
