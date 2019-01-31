@@ -1,10 +1,10 @@
 package com.jct.davidandyair.android5779_1395_8250.model.entities;
 
 import android.location.Address;
-import android.location.Location;
 
 import java.sql.Time;
 import java.util.Date;
+
 
 public class Drive {
 
@@ -13,8 +13,8 @@ public class Drive {
     }
 
     private DriveStatus status;
-    private Address source;
-    private Address destination;
+    private MyAddress source;
+    private MyAddress destination;
     private Date beginning;
     private Date end;
     private String name;
@@ -36,7 +36,7 @@ public class Drive {
         this.driverId = 0;
     }
 
-    public Drive(DriveStatus status, Address source, Address destination, Time beginning, Time end,
+    public Drive(DriveStatus status, MyAddress source, MyAddress destination, Time beginning, Time end,
                  String name, String phoneNumber, String eMailAddress, int driverId)
     {
         this.status = status;
@@ -68,7 +68,7 @@ public class Drive {
     public void setEnd(Date end) {
         this.end = end;
     }
-    public void setDestination(Address destination) {
+    public void setDestination(MyAddress destination) {
         this.destination = destination;
     }
     public void setBeginning(Date beginning) {
@@ -77,7 +77,7 @@ public class Drive {
     public void seteMailAddress(String eMailAddress) {
         this.eMailAddress = eMailAddress;
     }
-    public void setSource(Address source) {
+    public void setSource(MyAddress source) {
         this.source = source;
     }
     public void setName(String name) {
