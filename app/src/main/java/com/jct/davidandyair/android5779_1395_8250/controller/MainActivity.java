@@ -29,6 +29,7 @@ import com.jct.davidandyair.android5779_1395_8250.R;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.Drive;
+import com.jct.davidandyair.android5779_1395_8250.model.entities.MyAddress;
 
 import java.io.IOException;
 import java.util.List;
@@ -204,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
                 drive.setName(_name);
                 drive.setPhoneNumber(_phoneNumber);
                 drive.seteMailAddress(_email);
-                drive.setDestination(convertToAddress(locationB));
-                drive.setSource(convertToAddress(locationA));
+                drive.setDestination((MyAddress)convertToAddress(locationB));
+                drive.setSource((MyAddress)convertToAddress(locationA));
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
                 backend.askForNewDrive(drive);

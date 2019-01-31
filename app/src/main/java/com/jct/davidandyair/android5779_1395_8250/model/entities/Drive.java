@@ -1,7 +1,5 @@
 package com.jct.davidandyair.android5779_1395_8250.model.entities;
 
-import android.location.Address;
-
 import java.sql.Time;
 import java.util.Date;
 
@@ -97,10 +95,10 @@ public class Drive {
     public DriveStatus getStatus() {
         return status;
     }
-    public Address getDestination() {
+    public MyAddress getDestination() {
         return destination;
     }
-    public Address getSource() {
+    public MyAddress getSource() {
         return source;
     }
     public String getName() {
