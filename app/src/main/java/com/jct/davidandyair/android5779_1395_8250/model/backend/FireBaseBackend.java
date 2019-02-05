@@ -6,6 +6,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.Drive;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class FireBaseBackend implements IBackend {
     FirebaseDatabase database;
     private AsyncTask<Drive, Drive, Drive> asyncTask = new AsyncTask<Drive, Drive, Drive>() {
@@ -15,6 +18,8 @@ public class FireBaseBackend implements IBackend {
             database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("drives");
 
+            Date currentDate = Calendar.getInstance().getTime();
+            drives[0].setWhenLoadToFIrebase(currentDate);
             String key = myRef.push().getKey();
             drives[0].setKey(key);
             myRef.child(key).setValue(drives[0]);
