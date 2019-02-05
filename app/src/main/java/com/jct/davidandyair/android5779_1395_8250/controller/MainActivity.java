@@ -27,6 +27,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.jct.davidandyair.android5779_1395_8250.R;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.FactoryBackend;
+import com.jct.davidandyair.android5779_1395_8250.model.backend.FireBaseBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.android5779_1395_8250.model.entities.MyAddress;
@@ -205,11 +206,32 @@ public class MainActivity extends AppCompatActivity {
                 drive.setName(_name);
                 drive.setPhoneNumber(_phoneNumber);
                 drive.seteMailAddress(_email);
-                drive.setDestination((MyAddress)convertToAddress(locationB));
-                drive.setSource((MyAddress)convertToAddress(locationA));
+                drive.setDestination(convertToAddress(locationB));
+                drive.setSource(convertToAddress(locationA));
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
-                backend.askForNewDrive(drive);
+                backend.askForNewDrive(drive, new FireBaseBackend.Action() {
+                    @Override
+                    public void onSuccess(Object obj) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.drive_successfully_uploaded), Toast.LENGTH_LONG);
+                        name.setText("");
+                        phone.setText("");
+                        email.setText("");
+                        placeAutocompleteFragment1.setText("");
+                        placeAutocompleteFragment2.setText("");
+
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.upload_failed), Toast.LENGTH_LONG);
+                    }
+
+                    @Override
+                    public void onProgress(String status, double percent) {
+
+                    }
+                });
             }
         });
 

@@ -15,4 +15,6 @@
     <string name="error_destination">נא הזן את כתובת היעד המבוקשת</string>
     <string name="current_location">מיקום נוכחי</string>
     <string name="error_invalid_email">כתובת מייל לא תקינה</string>
+    <string name="drive_successfully_uploaded">הנסיעה הועלתה בהצלחה</string>
+    <string name="upload_failed">ההעלאה נכשלה.. נסה שוב?</string>
 </resources>

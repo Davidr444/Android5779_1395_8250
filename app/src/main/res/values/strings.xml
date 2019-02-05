@@ -14,4 +14,6 @@
     <string name="error_destination">Please Enter Your Destination Address</string>
     <string name="current_location">Current Location</string>
     <string name="error_invalid_email">Invalid email address</string>
+    <string name="drive_successfully_uploaded">Drive successfully uploaded</string>
+    <string name="upload_failed">Upload failed ... please try again?</string>
 </resources>
