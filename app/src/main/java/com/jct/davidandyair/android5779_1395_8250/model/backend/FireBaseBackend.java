@@ -11,24 +11,27 @@ import java.util.Date;
 
 public class FireBaseBackend implements IBackend {
     FirebaseDatabase database;
-    private AsyncTask<Drive, Drive, Drive> asyncTask = new AsyncTask<Drive, Drive, Drive>() {
-        @Override
-        protected Drive doInBackground(Drive... drives) {
-            // Write a message to the database
-            database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("drives");
-
-            Date currentDate = Calendar.getInstance().getTime();
-            drives[0].setWhenLoadToFIrebase(currentDate);
-            String key = myRef.push().getKey();
-            drives[0].setKey(key);
-            myRef.child(key).setValue(drives[0]);
-            return null;
-        }
-    };
+    private AsyncTask<Drive, Drive, Drive> asyncTask;
 
     @Override
     public void askForNewDrive(Drive d) {
+        asyncTask = new AsyncTask<Drive, Drive, Drive>() {
+            @Override
+            protected Drive doInBackground(Drive... drives) {
+                // Write a message to the database
+                database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("drives");
+
+                Date currentDate = Calendar.getInstance().getTime();
+                drives[0].setWhenLoadToFIrebase(currentDate);
+                String key = myRef.push().getKey();
+                drives[0].setKey(key);
+                myRef.child(key).setValue(drives[0]);
+                return null;
+            }
+        };
+
+
         asyncTask.execute(d);// using asynctask
     }
 }

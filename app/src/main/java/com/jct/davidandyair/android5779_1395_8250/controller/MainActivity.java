@@ -205,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
                 drive.setName(_name);
                 drive.setPhoneNumber(_phoneNumber);
                 drive.seteMailAddress(_email);
-                drive.setDestination(convertToAddress(locationB));
-                drive.setSource(convertToAddress(locationA));
+                drive.setDestination((MyAddress)convertToAddress(locationB));
+                drive.setSource((MyAddress)convertToAddress(locationA));
                 drive.setStatus(Drive.DriveStatus.AVAILABLE);
 
                 backend.askForNewDrive(drive);
